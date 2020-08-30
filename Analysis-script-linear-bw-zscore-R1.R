@@ -1,7 +1,7 @@
 rm(list=ls())
 # stress and fetal growth analysis 
 
-load("/Users/danagoin/Documents/Research projects/CiOB-ECHO/Projects/Stress and birth weight/data/stress_fetal_growth_imp")
+load(".../stress_fetal_growth_imp")
 
 # g-computation for individual exposures and sum 
 # first check positivity 
@@ -72,7 +72,7 @@ p <- ggplot(df_p, aes(x=p, fill=factor(get(exposure)))) + geom_density(alpha=0.7
   geom_vline(xintercept=min(df_p$p[df_p[[exposure]]==1]), linetype=2) +   geom_vline(xintercept=max(df_p$p[df_p[[exposure]]==0]), linetype=2) +
   labs(x="estimated propensity score", y="density")
 
-ggsave(p, file=paste0("/Users/danagoin/Documents/Research projects/CiOB-ECHO/Projects/Stress and birth weight/results/R1/propensity_plot_density_",exposure,".pdf"), width=10)
+ggsave(p, file=paste0(".../propensity_plot_density_",exposure,".pdf"), width=10)
 
 
 # --------------------------------------------------------------------------------------------------------------------------
@@ -176,7 +176,7 @@ all_results[i,] <- results
 rownames(all_results) <- exposures
 colnames(all_results) <-  c("rd","var","lb","ub","N")
 
-write.csv(all_results, file="/Users/danagoin/Documents/Research projects/CiOB-ECHO/Projects/Stress and birth weight/results/R1/stress_bw_zscore_indiv_R1.csv")
+write.csv(all_results, file=".../stress_bw_zscore_indiv_R1.csv")
 
 
 # --------------------------------------------------------------------------------------------------------------------------
@@ -334,23 +334,13 @@ rownames(all_results_mix) <- exposures
 colnames(all_results_mix) <- c("rd","var","lb","ub","N")
 
 
-write.csv(all_results_mix, file="/Users/danagoin/Documents/Research projects/CiOB-ECHO/Projects/Stress and birth weight/results/R1/stress_bw_zscore_mix_R1.csv")
+write.csv(all_results_mix, file=".../stress_bw_zscore_mix_R1.csv")
 
 
 # --------------------------------------------------------------------------------------------------------------------------
 # estimate G-computation for birth weight for gestational age for joint effect, all exposures at once
 # --------------------------------------------------------------------------------------------------------------------------
-
-# don't have anyone who experience all or none of the stressors who have proensity scores in the area of common support 
-# are there specific combinations we would be interested in? 
-# maybe econ_cat with unplanned_pregnancy, food_cat?
-# caregiving with jobstrain? 
-# individual associations while controlling for the other exposures  
-
-# consider looking at pairs of exposures -- include interactions? 
-# use delta method rather than bootstrap for birth weight analyses 
-# -- but also look into why you are getting 0 variance when you bootstrap. issue with sample size?
-
+                   
 gcomp_mi_joint <- function(m, ej) {
   
   df_p <- mice::complete(imp, m)
@@ -491,7 +481,7 @@ rownames(all_results_joint) <- unlist(lapply(1:length(exposures_joint), function
 
 
 
-write.csv(all_results_joint, file="/Users/danagoin/Documents/Research projects/CiOB-ECHO/Projects/Stress and birth weight/results/R1/stress_bw_zscore_joint_R1.csv")
+write.csv(all_results_joint, file=".../stress_bw_zscore_joint_R1.csv")
 
   # delta method SE by hand 
   # by hand 
