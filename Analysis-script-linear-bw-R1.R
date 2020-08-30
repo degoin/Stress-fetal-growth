@@ -107,7 +107,7 @@ all_results[i,] <- results
 rownames(all_results) <- exposures
 colnames(all_results) <-  c("rd","var","lb","ub","N")
 
-write.csv(all_results, file="/Users/danagoin/Documents/Research projects/CiOB-ECHO/Projects/Stress and birth weight/results/R1/stress_bw_indiv_R1.csv")
+write.csv(all_results, file=".../stress_bw_indiv_R1.csv")
 
 
 # --------------------------------------------------------------------------------------------------------------------------
